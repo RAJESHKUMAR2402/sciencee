@@ -42,7 +42,79 @@
         </div>
         <div class="clipboard-item">
             <span>Option 2: Clipboard Text 2</span>
-            <button onclick="copyToClipboard('Clipboard Text 2')">Copy</button>
+            <button onclick="copyToClipboard('import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy.stats import norm, uniform, binom, poisson, expon, gamma, beta, chi2, t, lognorm
+
+# Set the style for seaborn
+sns.set(style="whitegrid")
+
+# Create a figure to hold the subplots (4 rows and 3 columns)
+fig, axes = plt.subplots(4, 3, figsize=(18, 16))
+fig.suptitle('Different Probability Distributions', fontsize=20)
+
+# 1. Uniform Distribution
+uniform_data = np.random.uniform(low=0, high=10, size=1000)
+sns.histplot(uniform_data, kde=True, color='b', ax=axes[0, 0])
+axes[0, 0].set_title('Uniform Distribution')
+
+# 2. Normal (Gaussian) Distribution
+normal_data = np.random.normal(loc=0, scale=1, size=1000)
+sns.histplot(normal_data, kde=True, color='g', ax=axes[0, 1])
+axes[0, 1].set_title('Normal Distribution')
+
+# 3. Binomial Distribution
+n, p = 10, 0.5
+binomial_data = np.random.binomial(n, p, 1000)
+sns.histplot(binomial_data, kde=False, color='r', ax=axes[0, 2])
+axes[0, 2].set_title('Binomial Distribution')
+
+# 4. Poisson Distribution
+poisson_data = np.random.poisson(lam=3, size=1000)
+sns.histplot(poisson_data, kde=False, color='y', ax=axes[1, 0])
+axes[1, 0].set_title('Poisson Distribution')
+
+# 5. Exponential Distribution
+exponential_data = np.random.exponential(scale=1, size=1000)
+sns.histplot(exponential_data, kde=True, color='m', ax=axes[1, 1])
+axes[1, 1].set_title('Exponential Distribution')
+
+# 6. Gamma Distribution
+gamma_data = np.random.gamma(shape=2, scale=1, size=1000)
+sns.histplot(gamma_data, kde=True, color='c', ax=axes[1, 2])
+axes[1, 2].set_title('Gamma Distribution')
+
+# 7. Beta Distribution
+a, b = 2, 5
+beta_data = np.random.beta(a, b, size=1000)
+sns.histplot(beta_data, kde=True, color='orange', ax=axes[2, 0])
+axes[2, 0].set_title('Beta Distribution')
+
+# 8. Chi-Square Distribution
+df = 2
+chi_square_data = np.random.chisquare(df, size=1000)
+sns.histplot(chi_square_data, kde=True, color='purple', ax=axes[2, 1])
+axes[2, 1].set_title('Chi-Square Distribution')
+
+# 9. Student's t-Distribution
+df = 10
+t_data = np.random.standard_t(df, size=1000)
+sns.histplot(t_data, kde=True, color='teal', ax=axes[2, 2])
+axes[2, 2].set_title("Student's t-Distribution")
+
+# 10. Log-Normal Distribution
+lognormal_data = np.random.lognormal(mean=0, sigma=1, size=1000)
+sns.histplot(lognormal_data, kde=True, color='brown', ax=axes[3, 0])
+axes[3, 0].set_title('Log-Normal Distribution')
+
+# Hide empty subplots
+axes[3, 1].axis('off')
+axes[3, 2].axis('off')
+
+# Adjust layout
+plt.tight_layout(rect=[0, 0, 1, 0.96])
+plt.show()')">Copy</button>
         </div>
         <div class="clipboard-item">
             <span>Option 3: Clipboard Text 3</span>
