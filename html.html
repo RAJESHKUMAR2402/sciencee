@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clipboard Options</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        .clipboard-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .clipboard-item {
+            display: flex;
+            align-items: center;
+        }
+        button {
+            margin-left: 10px;
+        }
+    </style>
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard: ' + text);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <h1>Clipboard Options</h1>
+    <div class="clipboard-container">
+        <div class="clipboard-item">
+            <span>Option 1: Clipboard Text 1</span>
+            <button onclick="copyToClipboard('Clipboard Text 1')">Copy</button>
+        </div>
+        <div class="clipboard-item">
+            <span>Option 2: Clipboard Text 2</span>
+            <button onclick="copyToClipboard('Clipboard Text 2')">Copy</button>
+        </div>
+        <div class="clipboard-item">
+            <span>Option 3: Clipboard Text 3</span>
+            <button onclick="copyToClipboard('Clipboard Text 3')">Copy</button>
+        </div>
+        <div class="clipboard-item">
+            <span>Option 4: Clipboard Text 4</span>
+            <button onclick="copyToClipboard('Clipboard Text 4')">Copy</button>
+        </div>
+        <div class="clipboard-item">
+            <span>Option 5: Clipboard Text 5</span>
+            <button onclick="copyToClipboard('Clipboard Text 5')">Copy</button>
+        </div>
+        <div class="clipboard-item">
+            <span>Option 6: Clipboard Text 6</span>
+            <button onclick="copyToClipboard('Clipboard Text 6')">Copy</button>
+        </div>
+        <div class="clipboard-item">
+            <span>Option 7: Clipboard Text 7</span>
+            <button onclick="copyToClipboard('Clipboard Text 7')">Copy</button>
+        </div>
+        <div class="clipboard-item">
+            <span>Option 8: Clipboard Text 8</span>
+            <button onclick="copyToClipboard('Clipboard Text 8')">Copy</button>
+        </div>
+        <div class="clipboard-item">
+            <span>Option 9: Clipboard Text 9</span>
+            <button onclick="copyToClipboard('Clipboard Text 9')">Copy</button>
+        </div>
+        <div class="clipboard-item">
+            <span>Option 10: Clipboard Text 10</span>
+            <button onclick="copyToClipboard('Clipboard Text 10')">Copy</button>
+        </div>
+    </div>
+
+</body>
+</html>
