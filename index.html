@@ -117,12 +117,26 @@
     </style>
     <script>
 
-        // Function to randomly position buttons on the page
+        // Function to randomly position buttons on the page without overlapping
         function randomizeButtonPositions() {
             const buttons = document.querySelectorAll('.button');
+            const placedPositions = [];
+            const buttonSize = 50;
+
             buttons.forEach(button => {
-                const x = Math.random() * (window.innerWidth - 50);
-                const y = Math.random() * (window.innerHeight - 50);
+                let x, y, isOverlapping;
+
+                do {
+                    x = Math.random() * (window.innerWidth - buttonSize);
+                    y = Math.random() * (window.innerHeight - buttonSize);
+
+                    // Check for overlaps
+                    isOverlapping = placedPositions.some(pos => {
+                        return Math.abs(pos.x - x) < buttonSize && Math.abs(pos.y - y) < buttonSize;
+                    });
+                } while (isOverlapping);
+
+                placedPositions.push({ x, y });
                 button.style.left = `${x}px`;
                 button.style.top = `${y}px`;
             });
@@ -138,7 +152,7 @@
             // Start the animation and remove overlay after 3 seconds
             setTimeout(() => {
                 overlay.remove();
-            }, 2300);
+            }, 2000);
         }
 
         // Attach event listeners to buttons
@@ -160,6 +174,7 @@
     </script>
 </head>
 <body>
+    <!-- 62 Buttons -->
     <button class="button red"></button>
     <button class="button blue" onclick="window.location.href='index2.html'"></button>
     <button class="button green"></button>
