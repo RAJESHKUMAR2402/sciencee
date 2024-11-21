@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Code Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button {
+            display: block;
+            margin: 10px 0;
+            padding: 8px 12px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Copy Code Snippets</h1>
+
+    <!-- Buttons to copy code -->
+    <button onclick="copyCode1()">Copy Code 1</button>
+    <button onclick="copyCode2()">Copy Code 2</button>
+    <button onclick="copyCode3()">Copy Code 3</button>
+    <button onclick="copyCode4()">Copy Code 4</button>
+    <button onclick="copyCode5()">Copy Code 5</button>
+    <button onclick="copyCode6()">Copy Code 6</button>
+    <button onclick="copyCode7()">Copy Code 7</button>
+    <button onclick="copyCode8()">Copy Code 8</button>
+    <button onclick="copyCode9()">Copy Code 9</button>
+
+
+    <script>
+        const code1 = `
+from bs4 import BeautifulSoup as bs
+import requests
+
+url="https://finance.yahoo.com/most-active"
+
+resp=requests.get(url)
+print(resp)
+
+htmlcont=resp.content
+htmlcont
+
+soup=bs(htmlcont,"html.parser")
+
+title=soup.find("title")
+title
+
+title.get_text()
+
+stock_table=soup.find("tbody")
+stock_table
+
+for i in stock_table.find_all("tr"):
+    print(i)
+
+symbol=[]
+for i in stock_table.find_all("tr"):
+    sym=i.find("td",attrs={"aria-label":"Symbol"})
+    symbol.append(sym.text)
+symbol
+
+print(type(symbol))
+
+for i in stock_table.find_all("tr"):
+    print(i.prettify())
+        `;
+
+        const code2 = `
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy.stats import norm, uniform, binom, poisson, expon, gamma, beta, chi2, t, lognorm
+# Set the style for seaborn
+sns.set(style="whitegrid")
+# Create a figure to hold the subplots (4 rows and 3 columns)
+fig, axes = plt.subplots(4, 3, figsize=(18, 16))
+fig.suptitle('Different Probability Distributions', fontsize=20)
+# 1. Uniform Distribution
+uniform_data = np.random.uniform(low=0, high=10, size=1000)
+sns.histplot(uniform_data, kde=True, color='b', ax=axes[0, 0])
+axes[0, 0].set_title('Uniform Distribution')
+# 2. Normal (Gaussian) Distribution
+normal_data = np.random.normal(loc=0, scale=1, size=1000)
+sns.histplot(normal_data, kde=True, color='g', ax=axes[0, 1])
+axes[0, 1].set_title('Normal Distribution')
+# 3. Binomial Distribution
+n, p = 10, 0.5
+binomial_data = np.random.binomial(n, p, 1000)
+sns.histplot(binomial_data, kde=False, color='r', ax=axes[0, 2])
+axes[0, 2].set_title('Binomial Distribution')
+# 4. Poisson Distribution
+poisson_data = np.random.poisson(lam=3, size=1000)
+sns.histplot(poisson_data, kde=False, color='y', ax=axes[1, 0])
+axes[1, 0].set_title('Poisson Distribution')
+# 5. Exponential Distribution
+exponential_data = np.random.exponential(scale=1, size=1000)
+sns.histplot(exponential_data, kde=True, color='m', ax=axes[1, 1])
+axes[1, 1].set_title('Exponential Distribution')
+# 6. Gamma Distribution
+gamma_data = np.random.gamma(shape=2, scale=1, size=1000)
+sns.histplot(gamma_data, kde=True, color='c', ax=axes[1, 2])
+axes[1, 2].set_title('Gamma Distribution')
+# 7. Beta Distribution
+a, b = 2, 5
+beta_data = np.random.beta(a, b, size=1000)
+sns.histplot(beta_data, kde=True, color='orange', ax=axes[2, 0])
+axes[2, 0].set_title('Beta Distribution')
+# 8. Chi-Square Distribution
+df = 2
+chi_square_data = np.random.chisquare(df, size=1000)
+sns.histplot(chi_square_data, kde=True, color='purple', ax=axes[2, 1])
+axes[2, 1].set_title('Chi-Square Distribution')
+# 9. Student's t-Distribution
+df = 10
+t_data = np.random.standard_t(df, size=1000)
+sns.histplot(t_data, kde=True, color='teal', ax=axes[2, 2])
+axes[2, 2].set_title("Student's t-Distribution")
+# 10. Log-Normal Distribution
+lognormal_data = np.random.lognormal(mean=0, sigma=1, size=1000)
+sns.histplot(lognormal_data, kde=True, color='brown', ax=axes[3, 0])
+axes[3, 0].set_title('Log-Normal Distribution')
+# Hide empty subplots
+axes[3, 1].axis('off')
+axes[3, 2].axis('off')
+# Adjust layout
+plt.tight_layout(rect=[0, 0, 1, 0.96])
+plt.show()
+        `;
+
+        const code3 = `
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+import statsmodels.api as sm
+sns.set(style="whitegrid")
+
+mu, sigma = 0, 1  
+normal_data = np.random.normal(mu, sigma, 1000)
+
+plt.figure(figsize=(10, 6))
+sns.histplot(normal_data, kde=True, color='blue')
+plt.title('Normal Distribution (μ=0, σ=1)', fontsize=15)
+plt.xlabel('Value')
+plt.ylabel('Frequency')
+plt.show()
+
+# Perform Normality Test using Q-Q Plot
+plt.figure(figsize=(8, 8))
+sm.qqplot(normal_data, line ='45')
+plt.title('Q-Q Plot for Normal Distribution', fontsize=15)
+plt.grid(True)
+plt.show()
+
+# Shapiro-Wilk Test for Normality (optional)
+stat, p = stats.shapiro(normal_data)
+print(f'Statistics={stat:.3f}, p-value={p:.3f}')
+
+# Interpret the p-value
+alpha = 0.05
+if p > alpha:
+    print('Sample looks normal (fail to reject H0)')
+else:
+    print('Sample does not look normal (reject H0)')
+        `;
+
+        const code4 = `
+import numpy as np # Numerical Python for Linear Algebra
+from numpy import array # NumPy for creating Array
+from numpy import argmax # NumPy for argmax to get indices of maximum element
+import pandas as pd # For Data Manipulation, Indexing, Slicing, Chopping
+import matplotlib.pyplot as plt # For Data Visualization
+import seaborn as sns # For Data Visualization, Support for Matplolib
+from sklearn.preprocessing import LabelEncoder # To normalize the data
+from sklearn.preprocessing import OneHotEncoder # For Categorical data to represent in Binary form
+from matplotlib import cm
+from matplotlib.colors import ListedColormap, LinearSegmentedColormap
+#from wordcloud import WordCloud, STOPWORDS
+import numpy as npy
+from PIL import Image
+from sklearn import linear_model, metrics
+df = pd.read_excel(r"D:\\Downloads\\Netflix Dataset.xlsx")
+df
+df.shape
+df.describe()
+df.head(10)
+df.tail(10)
+df.isnull().values.any()
+df.isnull().sum()
+sns.heatmap(df.isnull(), yticklabels=False, cmap="viridis")
+df.drop(['Title','Tags', 'View Rating','Release Date','Netflix Release Date','Production House',
+ 'Netflix Link','IMDb Link','Metacritic Score','Boxoffice','Summary','Poster','TMDb Trailer',
+ 'Trailer Site'], axis = 1,inplace=True)
+sns.heatmap(df.isnull(), yticklabels=False, cmap="Paired")
+df.dropna(subset=['Director'], inplace=True)
+df.dropna(subset=['Writer'], inplace=True)
+df.dropna(subset=['Languages'], inplace=True)
+df.dropna(subset=['Actors'], inplace=True)
+df.dropna(subset=['Country Availability'], inplace=True)
+df.dropna(subset=['Genre'], inplace=True)
+df.isna().sum()
+import warnings
+warnings.filterwarnings('ignore')
+df['Hidden Gem Score'].ffill(axis=0, inplace=True)
+df['IMDb Score'].ffill(axis=0,inplace=True)
+df.isna().sum()
+df['IMDb Votes'] = df['IMDb Votes'].fillna(df['IMDb Votes'].mode()[0])
+df['Rotten Tomatoes Score'].fillna(df['Rotten Tomatoes Score'].mean(),inplace=True)
+df['Awards Received'] = df['Awards Received'].fillna(0)
+df['Awards Nominated For']=df['Awards Nominated For'].replace(np.nan,0)
+sns.heatmap(df.isnull())
+df.reset_index(inplace=True)
+df['Series or Movie'].unique()
+pd.get_dummies(df['Series or Movie'])
+df = pd.concat([df, pd.get_dummies(df['Series or Movie'])], axis=1)
+df.rename(columns={'Series or Movie': 'Series/Movie'}, inplace=True)
+p1 = df['Series/Movie'].value_counts()
+plt.pie(p1,labels=p1.index, explode=(0.2,0), autopct='%.1f%%', shadow=True)
+plt.title('Series v/s Movie Ratio')
+plt.show()
+plt.bar(p1.index,p1,color=['red', 'blue'])
+plt.title('Series v/s Movie Ratio')
+plt.show()
+p2 = df['Director'].sort_values(ascending=True).value_counts().head(10)
+plt.pie(p2,labels=p2.index, autopct='%.1f%%', shadow=True)
+plt.title('Top 10 Directors')
+plt.show()
+from PIL import Image
+import requests
+from io import BytesIO
+url = "http://cdn1.nflximg.net/images/5543/12045543.jpg"
+response = requests.get(url)
+img = Image.open(BytesIO(response.content))
+imgresponse = requests.get(url)
+img = Image.open(BytesIO(response.content))
+img
+        `;
+
+        const code5 = `
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+url = "https://raw.githubusercontent.com/selva86/datasets/master/BostonHousing.csv"
+data = pd.read_csv(url)
+
+# Display the first few rows of the dataset
+print(data.head())
+
+# Define X and y
+X = data.drop("medv", axis=1)
+y = data["medv"]
+
+# Select numeric and categorical features
+numeric_features = X.select_dtypes(include=['int64', 'float64']).columns
+categorical_features = X.select_dtypes(include=['object']).columns
+
+# Preprocessor: Impute missing values for numeric data and one-hot encode categorical data
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', SimpleImputer(strategy='mean'), numeric_features),
+        ('cat', OneHotEncoder(), categorical_features)
+    ]
+)
+
+# Create a pipeline with the preprocessor and a scaler
+pipeline = Pipeline(steps=[
+    ('preprocessor', preprocessor),
+    ('scaler', StandardScaler())
+])
+
+# Fit and transform the data
+X_preprocessed = pipeline.fit_transform(X)
+
+# Split the data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X_preprocessed, y, test_size=0.2, random_state=42)
+
+# Create and train the linear regression model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = model.predict(X_test)
+
+# Output predicted values
+print(y_pred)
+
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Predict on the test set
+y_pred = model.predict(X_test)
+
+# Calculate Mean Squared Error (MSE) and R-Squared (R2)
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+# Print MSE and R-Squared values
+print(f"Mean Squared Error: {mse}")
+print(f"R-Squared: {r2}")
+
+# Plot Actual vs Predicted values
+plt.figure(figsize=(10, 6))
+plt.scatter(y_test, y_pred, color='blue', label='Predicted vs Actual')
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color='red', linestyle='--', label='Perfect Prediction Line')
+plt.title('Actual vs Predicted Home Prices')
+plt.xlabel('Actual Prices')
+plt.ylabel('Predicted Prices')
+plt.legend()
+plt.show()
+        `;
+        
+        const code6 = `
+import numpy as np 
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, roc_curve
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline 
+from sklearn.impute import SimpleImputer
+
+url="https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.csv"
+column_names=['Pregnancies', 'Glucose', 'Blood Pressure',' Skin Thickness', 'Insulin', 'BMT', 'Diabetes Pedigree', 'Age', 'Outcome']
+data=pd.read_csv(url, names=column_names)
+
+data.head()
+
+X=data.drop('Outcome', axis=1) 
+y=data["Outcome"]
+
+numeric_features = X.columns
+
+preprocessor =ColumnTransformer(transformers=[('num', SimpleImputer(strategy ='mean'), numeric_features)])
+
+pipeline= Pipeline(steps=[('preprocessor', preprocessor), ('scaler', StandardScaler())])
+
+X_preprocessed=pipeline.fit_transform(X)
+
+X_train, X_test, y_train, y_test = train_test_split(X_preprocessed, y, test_size=0.2, random_state=42)
+
+model=LogisticRegression()
+
+model.fit(X_train, y_train) 
+y_pred = model.predict(X_test) 
+y_pred_prob = model.predict_proba(X_test) [:, 1]
+
+cm = confusion_matrix(y_test, y_pred)
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+plt.title('Confusion Matrix')
+plt.xlabel('Predicted') 
+plt.ylabel('Actual')
+plt.show()
+
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred) 
+recall = recall_score(y_test, y_pred) 
+f1=f1_score(y_test, y_pred)
+
+roc_auc = roc_auc_score(y_test, y_pred_prob)
+print(f"Accuracy: {accuracy}") 
+print(f"Precision: {precision}")
+print(f"Recall: {recall}")
+print(f"F1 Score: {f1}")
+print(f"ROC AUC: {roc_auc}")
+
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_prob)
+plt.figure(figsize=(8,6))
+plt.plot(fpr, tpr, color='blue', label=f"ROC Curve (AUC = {roc_auc:.2f})")
+plt.plot([0, 1], [0, 1], color='red', linestyle='--')
+plt.title('ROC Curve')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.legend()
+plt.show()
+        `;
+
+        const code7 = `
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+from sklearn.metrics import silhouette_score
+from sklearn.impute import SimpleImputer
+import warnings
+warnings.filterwarnings('ignore')
+
+df = pd.read_csv(r"D:\\Downloads\\customer_data (1).csv")
+print("Dataset preview:\n", df.head())
+
+df = df.drop('country', axis=1)
+df['education'] = df['education'].fillna('Unknown')
+df['education'] = df['education'].map({'High School': 0, 'Bachelor': 1, 'Master': 2, 'PhD': 3, 'Unknown': 4})
+df['gender'] = df['gender'].map({'Male': 1, 'Female': 0})
+df.isnull().sum()
+
+X = df[['age', 'gender', 'education', 'income', 'purchase_frequency', 'spending']]
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+wcss = []  
+
+for i in range(1, 11):
+    kmeans = KMeans(n_clusters=i, init='k-means++', max_iter=300, n_init=10, random_state=42)
+    kmeans.fit(X_scaled)
+    wcss.append(kmeans.inertia_)
+
+plt.figure(figsize=(8, 6))
+plt.plot(range(1, 11), wcss, marker='o', linestyle='-', color='b')
+plt.title('Elbow Method for Optimal Number of Clusters')
+plt.xlabel('Number of clusters')
+plt.ylabel('WCSS (Within-cluster Sum of Squares)')
+plt.show()
+
+optimal_clusters = 4
+
+kmeans = KMeans(n_clusters=optimal_clusters, init='k-means++', max_iter=300, n_init=10, random_state=42)
+df['segment'] = kmeans.fit_predict(X_scaled)
+
+sil_score = silhouette_score(X_scaled, df['segment'])
+print(f'Silhouette Score: {sil_score}')
+
+cluster_centers = pd.DataFrame(scaler.inverse_transform(kmeans.cluster_centers_), columns=X.columns)
+cluster_centers['Cluster'] = range(optimal_clusters)
+print("\nCluster Centers:\n", cluster_centers)
+
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+
+plt.figure(figsize=(8, 6))
+plt.scatter(X_pca[:, 0], X_pca[:, 1], c=df['segment'], cmap='viridis', s=100)
+plt.title(f'Customer Segmentation (n_clusters={optimal_clusters})')
+plt.xlabel('PCA Component 1')
+plt.ylabel('PCA Component 2')
+plt.colorbar(label='Segment')
+plt.show()
+
+print("\nSegmented customer data:\n", df[['name', 'age', 'income', 'purchase_frequency', 'spending', 'segment']].head())
+        `;
+
+        const code8 = `
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, roc_curve
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
+warnings.filterwarnings("ignore")
+
+df = pd.read_csv(r"D:\\Downloads\\Telco-Customer-Churn.csv")
+
+df.dtypes
+
+df['TotalCharges'] = pd.to_numeric(df['TotalCharges'], errors="coerce")
+df['TotalCharges'].fillna(df['TotalCharges'].mean(), inplace=True)
+
+label_enc = LabelEncoder()
+
+df['gender'] = label_enc.fit_transform(df['gender'])
+df['Partner'] = label_enc.fit_transform(df['Partner'])
+df['Dependents'] = label_enc.fit_transform(df['Dependents'])
+df['PhoneService'] = label_enc.fit_transform(df['PhoneService'])
+df['MultipleLines'] = label_enc.fit_transform(df['MultipleLines'])
+df['InternetService'] = label_enc.fit_transform(df['InternetService'])
+df['OnlineSecurity'] = label_enc.fit_transform(df['OnlineSecurity'])
+df['OnlineBackup'] = label_enc.fit_transform(df['OnlineBackup'])
+df['DeviceProtection'] = label_enc.fit_transform(df['DeviceProtection'])
+df['TechSupport'] = label_enc.fit_transform(df['TechSupport'])
+df['StreamingTV'] = label_enc.fit_transform(df['StreamingTV'])
+df['StreamingMovies'] = label_enc.fit_transform(df['StreamingMovies'])
+df['Contract'] = label_enc.fit_transform(df['Contract'])
+df['PaperlessBilling'] = label_enc.fit_transform(df['PaperlessBilling'])
+df['PaymentMethod'] = label_enc.fit_transform(df['PaymentMethod'])
+df['Churn'] = label_enc.fit_transform(df['Churn'])
+
+X = df.drop(['Churn', 'customerID'], axis=1)
+y = df['Churn']
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+dt_model = DecisionTreeClassifier(random_state=42)
+dt_model.fit(X_train, y_train)
+y_pred_dt = dt_model.predict(X_test)
+print("Decision Tree Classifier Report:\n", classification_report(y_test, y_pred_dt))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred_dt))
+
+rf_model = RandomForestClassifier(random_state=42, n_estimators=100)
+rf_model.fit(X_train, y_train)
+y_pred_rf = rf_model.predict(X_test)
+print("Random Forest Classifier Report:\n", classification_report(y_test, y_pred_rf))
+print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred_rf))
+
+feat_importances = pd.Series(rf_model.feature_importances_, index=X.columns)
+feat_importances.nlargest(10).plot(kind='barh')
+plt.title("Top 10 Important Features - Random Forest")
+plt.show()
+
+y_pred_prob_rf = rf_model.predict_proba(X_test)[:, 1]
+fpr_rf, tpr_rf, _ = roc_curve(y_test, y_pred_prob_rf)
+roc_auc_rf = roc_auc_score(y_test, y_pred_prob_rf)
+
+plt.figure(figsize=(8, 6))
+plt.plot(fpr_rf, tpr_rf, color='blue', label=f"ROC Curve (AUC = {roc_auc_rf:.2f})")
+plt.plot([0, 1], [0, 1], color='red', linestyle='--')
+plt.title('ROC Curve - Random Forest')
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.legend()e
+plt.show()
+        `;
+
+        const code9 = `
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import silhouette_score
+from sklearn.cluster import KMeans
+
+df = pd.read_csv(r"D:\\Downloads\\shopping_data.csv")
+
+print("Initial Data:\n", df.head())
+
+df = df.dropna()  # Remove missing values
+X = df[['age', 'annual_income', 'spending_score']]
+
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+kmeans = KMeans(n_clusters=4, random_state=42)
+df['Cluster'] = kmeans.fit_predict(X_scaled)
+
+sil_score = silhouette_score(X_scaled, df['Cluster'])
+print(f'Silhouette Score: {sil_score}')
+
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+
+plt.figure(figsize=(8, 6))
+plt.scatter(X_pca[:, 0], X_pca[:, 1], c=df['Cluster'], cmap='viridis', s=100)
+plt.title('Customer Segments - PCA Reduced')
+plt.xlabel('PCA Component 1')
+plt.ylabel('PCA Component 2')
+plt.colorbar(label='Cluster')
+plt.show()
+
+cluster_centers = pd.DataFrame(scaler.inverse_transform(kmeans.cluster_centers_), columns=X.columns)
+print("\nCluster Centers:\n", cluster_centers)
+        `;
+
+
+
+        function copyCode1() {
+            navigator.clipboard.writeText(code1).then(() => {
+                alert('Code 1 copied to clipboard!');
+            });
+        }
+
+        function copyCode2() {
+            navigator.clipboard.writeText(code2).then(() => {
+                alert('Code 2 copied to clipboard!');
+            });
+        }
+
+        function copyCode3() {
+            navigator.clipboard.writeText(code3).then(() => {
+                alert('Code 3 copied to clipboard!');
+            });
+        }
+
+        function copyCode4() {
+            navigator.clipboard.writeText(code4).then(() => {
+                alert('Code 4 copied to clipboard!');
+            });
+        }
+
+        function copyCode5() {
+            navigator.clipboard.writeText(code5).then(() => {
+                alert('Code 5 copied to clipboard!');
+            });
+        }
+    
+               function copyCode6() {
+            navigator.clipboard.writeText(code6).then(() => {
+                alert("Code 6 copied to clipboard!");
+            });
+        }
+
+        function copyCode7() {
+            navigator.clipboard.writeText(code7).then(() => {
+                alert("Code 7 copied to clipboard!");
+            });
+        }
+
+        function copyCode8() {
+            navigator.clipboard.writeText(code8).then(() => {
+                alert("Code 8 copied to clipboard!");
+            });
+        }
+
+        function copyCode9() {
+            navigator.clipboard.writeText(code9).then(() => {
+                alert("Code 9 copied to clipboard!");
+            });
+        }
+    </script>
+</body>
+</html>
