@@ -52,6 +52,34 @@
         .beige { background-color: beige; }
         .tan { background-color: tan; }
         .goldenrod { background-color: goldenrod; }
+        .orchid { background-color: orchid; }
+        .azure { background-color: azure; }
+        .peach { background-color: peachpuff; }
+        .mint { background-color: mintcream; }
+        .sand { background-color: sandybrown; }
+        .steel { background-color: steelblue; }
+        .lavenderblush { background-color: lavenderblush; }
+        .darkgreen { background-color: darkgreen; }
+        .lightpink { background-color: lightpink; }
+        .forest { background-color: forestgreen; }
+        .firebrick { background-color: firebrick; }
+        .peru { background-color: peru; }
+        .snow { background-color: snow; }
+        .midnight { background-color: midnightblue; }
+        .honeydew { background-color: honeydew; }
+        .ivory { background-color: ivory; }
+        .hotpink { background-color: hotpink; }
+        .papaya { background-color: papayawhip; }
+        .seashell { background-color: seashell; }
+        .powder { background-color: powderblue; }
+        .aliceblue { background-color: aliceblue; }
+        .thistle { background-color: thistle; }
+        .linen { background-color: linen; }
+        .oldlace { background-color: oldlace; }
+        .bisque { background-color: bisque; }
+        .seagreen { background-color: seagreen; }
+        .tomato { background-color: tomato; }
+        .springgreen { background-color: springgreen; }
 
         /* Fullscreen overlay for animation */
         .overlay {
@@ -88,6 +116,11 @@
         }
     </style>
     <script>
+        // Redirect to home page on refresh
+        if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+            window.location.href = "index.html";
+        }
+
         // Function to randomly position buttons on the page
         function randomizeButtonPositions() {
             const buttons = document.querySelectorAll('.button');
@@ -109,7 +142,7 @@
             // Start the animation and remove overlay after 3 seconds
             setTimeout(() => {
                 overlay.remove();
-            }, 3000);
+            }, 2300);
         }
 
         // Attach event listeners to buttons
@@ -163,5 +196,33 @@
     <button class="button beige"></button>
     <button class="button tan"></button>
     <button class="button goldenrod"></button>
+    <button class="button orchid"></button>
+    <button class="button azure"></button>
+    <button class="button peach"></button>
+    <button class="button mint"></button>
+    <button class="button sand"></button>
+    <button class="button steel"></button>
+    <button class="button lavenderblush"></button>
+    <button class="button darkgreen"></button>
+    <button class="button lightpink"></button>
+    <button class="button forest"></button>
+    <button class="button firebrick"></button>
+    <button class="button peru"></button>
+    <button class="button snow"></button>
+    <button class="button midnight"></button>
+    <button class="button honeydew"></button>
+    <button class="button ivory"></button>
+    <button class="button hotpink"></button>
+    <button class="button papaya"></button>
+    <button class="button seashell"></button>
+    <button class="button powder"></button>
+    <button class="button aliceblue"></button>
+    <button class="button thistle"></button>
+    <button class="button linen"></button>
+    <button class="button oldlace"></button>
+    <button class="button bisque"></button>
+    <button class="button seagreen"></button>
+    <button class="button tomato"></button>
+    <button class="button springgreen"></button>
 </body>
 </html>
