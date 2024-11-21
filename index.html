@@ -6,55 +6,63 @@
     <title>Color Buttons</title>
     <style>
         body {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
+            height: 100vh;
             background-color: #f4f4f4;
+            position: relative;
+            overflow: hidden;
         }
         .button {
-            width: 100px;
+            width: 50px;
             height: 50px;
-            margin: 10px;
             border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 16px;
+            border-radius: 50%;
+            position: absolute;
             cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .button:hover {
-            transform: scale(1.1);
         }
         .red { background-color: red; }
         .blue { background-color: blue; }
         .green { background-color: green; }
-        .yellow { background-color: yellow; color: black; }
+        .yellow { background-color: yellow; }
         .orange { background-color: orange; }
         .purple { background-color: purple; }
-        .pink { background-color: pink; color: black; }
+        .pink { background-color: pink; }
         .brown { background-color: brown; }
-        .cyan { background-color: cyan; color: black; }
-        .lime { background-color: lime; color: black; }
-        .black { background-color: black; color: white; }
+        .cyan { background-color: cyan; }
+        .lime { background-color: lime; }
+        .black { background-color: black; }
         .grey { background-color: grey; }
     </style>
+    <script>
+        // Function to randomly position buttons on the page
+        function randomizeButtonPositions() {
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(button => {
+                const x = Math.random() * (window.innerWidth - 50);
+                const y = Math.random() * (window.innerHeight - 50);
+                button.style.left = `${x}px`;
+                button.style.top = `${y}px`;
+            });
+        }
+
+        // Randomize positions on page load
+        window.onload = randomizeButtonPositions;
+        // Randomize positions on window resize
+        window.onresize = randomizeButtonPositions;
+    </script>
 </head>
 <body>
-    <button class="button red" onclick="alert('Red button clicked!')">Red</button>
-    <button class="button green" onclick="alert('Green button clicked!')">Green</button>
-    <button class="button yellow" onclick="alert('Yellow button clicked!')">Yellow</button>
-    <button class="button orange" onclick="alert('Orange button clicked!')">Orange</button>
-    <button class="button purple" onclick="alert('Purple button clicked!')">Purple</button>
-    <button class="button pink" onclick="alert('Pink button clicked!')">Pink</button>
-    <button class="button brown" onclick="alert('Brown button clicked!')">Brown</button>
-    <button class="button blue" onclick="window.location.href='index2.html'">Blue</button>
-    <button class="button cyan" onclick="alert('Cyan button clicked!')">Cyan</button>
-    <button class="button lime" onclick="alert('Lime button clicked!')">Lime</button>
-    <button class="button black" onclick="alert('Black button clicked!')">Black</button>
-    <button class="button grey" onclick="alert('Grey button clicked!')">Grey</button>
+    <button class="button red" onclick="alert('Red button clicked!')"></button>
+    <button class="button green" onclick="alert('Green button clicked!')"></button>
+    <button class="button yellow" onclick="alert('Yellow button clicked!')"></button>
+    <button class="button orange" onclick="alert('Orange button clicked!')"></button>
+    <button class="button purple" onclick="alert('Purple button clicked!')"></button>
+    <button class="button pink" onclick="alert('Pink button clicked!')"></button>
+    <button class="button brown" onclick="alert('Brown button clicked!')"></button>
+    <button class="button blue" onclick="window.location.href='index2.html'"></button>
+    <button class="button cyan" onclick="alert('Cyan button clicked!')"></button>
+    <button class="button lime" onclick="alert('Lime button clicked!')"></button>
+    <button class="button black" onclick="alert('Black button clicked!')"></button>
+    <button class="button grey" onclick="alert('Grey button clicked!')"></button>
 </body>
 </html>
