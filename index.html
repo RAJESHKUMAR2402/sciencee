@@ -32,31 +32,58 @@
         .lime { background-color: lime; }
         .black { background-color: black; }
         .grey { background-color: grey; }
+        .teal { background-color: teal; }
+        .magenta { background-color: magenta; }
+        .gold { background-color: gold; }
+        .silver { background-color: silver; }
+        .navy { background-color: navy; }
+        .maroon { background-color: maroon; }
+        .olive { background-color: olive; }
+        .violet { background-color: violet; }
+        .indigo { background-color: indigo; }
+        .coral { background-color: coral; }
+        .salmon { background-color: salmon; }
+        .plum { background-color: plum; }
+        .khaki { background-color: khaki; }
+        .lavender { background-color: lavender; }
+        .crimson { background-color: crimson; }
+        .aqua { background-color: aqua; }
+        .chocolate { background-color: chocolate; }
+        .beige { background-color: beige; }
+        .tan { background-color: tan; }
+        .goldenrod { background-color: goldenrod; }
 
         /* Fullscreen overlay for animation */
         .overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            justify-content: center;
-            align-items: center;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background-color: transparent;
+            border-radius: 50%;
             z-index: 999;
-            opacity: 0;
-            animation: fade-out 3s forwards;
+            opacity: 0.8;
+            animation: expand-fade 3s forwards;
         }
 
-        /* Keyframes for fade-out effect */
-        @keyframes fade-out {
+        /* Keyframes for expand-fade effect */
+        @keyframes expand-fade {
             0% {
-                display: flex;
+                width: 0;
+                height: 0;
                 opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+            50% {
+                width: 100vw;
+                height: 100vw;
+                opacity: 0.7;
             }
             100% {
+                width: 150vw;
+                height: 150vw;
                 opacity: 0;
-                display: none;
             }
         }
     </style>
@@ -80,7 +107,6 @@
             document.body.appendChild(overlay);
 
             // Start the animation and remove overlay after 3 seconds
-            overlay.style.display = 'flex';
             setTimeout(() => {
                 overlay.remove();
             }, 3000);
@@ -117,5 +143,25 @@
     <button class="button lime"></button>
     <button class="button black"></button>
     <button class="button grey"></button>
+    <button class="button teal"></button>
+    <button class="button magenta"></button>
+    <button class="button gold"></button>
+    <button class="button silver"></button>
+    <button class="button navy"></button>
+    <button class="button maroon"></button>
+    <button class="button olive"></button>
+    <button class="button violet"></button>
+    <button class="button indigo"></button>
+    <button class="button coral"></button>
+    <button class="button salmon"></button>
+    <button class="button plum"></button>
+    <button class="button khaki"></button>
+    <button class="button lavender"></button>
+    <button class="button crimson"></button>
+    <button class="button aqua"></button>
+    <button class="button chocolate"></button>
+    <button class="button beige"></button>
+    <button class="button tan"></button>
+    <button class="button goldenrod"></button>
 </body>
 </html>
