@@ -78,11 +78,10 @@ end
 display(H);
         `;
 
-        const code2 = `clc;
-clear all;
+        const code2 = `clear all;
 
 % The input string
-x = 'inf';
+x = 'good';
 
 % Length of the string
 len = length(x);
@@ -99,11 +98,11 @@ lenChar = length(u);
 disp('Number of unique characters:');
 disp(lenChar);
 
-% Creating 2 zero vectors to hol        d frequency and probability
+% Creating vectors for frequency and probability
 z = zeros(1, lenChar);
 p = zeros(1, lenChar);
 
-% Finding the values of frequency and probability
+% Calculating frequency and probability
 for i = 1:lenChar
    z(i) = length(strfind(x, u(i))); % frequency of each unique character
    p(i) = z(i) / len;               % probability of each unique character
@@ -122,31 +121,55 @@ disp('Information Entropy (H):');
 disp(H);
 
 % Huffman coding
-% Create a priority queue (min-heap)
+% Create priority queue
 symbols = cellstr(u');  % Convert characters to a cell array of strings
 freq = p;               % probabilities as frequencies
 
-% Create a cell array for the Huffman Tree
+% Initialize Huffman Tree
 huffmanTree = cell(length(symbols),1);
 for i = 1:length(symbols)
     huffmanTree{i} = symbols{i};
 end
 
-% Combine nodes until we have a full tree
+% Combine nodes into a tree
 while length(freq) > 1
     % Sort frequencies and symbols
     [freq, idx] = sort(freq);
     symbols = symbols(idx);
     huffmanTree = huffmanTree(idx);
 
-    % Combine the two smallest frequencies
-    newSymbol = {symbols{1}, symbols{2}};  % combine the symbols
-    newFreq = freq(1) + freq(2);           % sum the two smallest frequencies
+    % Combine two smallest frequencies
+    newSymbol = {symbols{1}, symbols{2}};
+    newFreq = freq(1) + freq(2);
 
-    % Update the Huffman Tree
+    % Update tree, symbols, and frequencies
     symbols = [{newSymbol}, symbols(3:end)];
     freq = [newFreq, freq(3:end)];
-    huffmanTree = [{newSymbol}, huffmanTree(3:end)];end
+    huffmanTree = [{newSymbol}, huffmanTree(3:end)];
+end
+
+% Define the Huffman code generator as a sub-function
+function codes = generateHuffmanCodes(node, prefix)
+    codes = struct();  % Use struct instead of containers.Map
+    if iscell(node)
+        % Internal node: recurse left and right
+        leftCodes = generateHuffmanCodes(node{1}, [prefix '0']);
+        rightCodes = generateHuffmanCodes(node{2}, [prefix '1']);
+        codes = mergeStructs(leftCodes, rightCodes);
+    else
+        % Leaf node: assign code
+        codes.(node) = prefix;
+    end
+end
+
+% Helper function to merge two structs
+function result = mergeStructs(s1, s2)
+    result = s1;
+    fields = fieldnames(s2);
+    for i = 1:length(fields)
+        result.(fields{i}) = s2.(fields{i});
+    end
+end
 
 % Generate Huffman codes
 codes = generateHuffmanCodes(huffmanTree{1}, '');
@@ -154,23 +177,8 @@ codes = generateHuffmanCodes(huffmanTree{1}, '');
 % Display Huffman codes
 disp('Huffman Codes:');
 for i = 1:length(u)
-    disp([u(i), ': ', codes(u(i))]);
-end
-
-% Helper function to generate Huffman codes recursively
-function codes = generateHuffmanCodes(node, prefix)
-    codes = containers.Map();
-    if iscell(node)
-        % Internal node, traverse left (add '0') and right (add '1')
-        leftCodes = generateHuffmanCodes(node{1}, [prefix '0']);
-        rightCodes = generateHuffmanCodes(node{2}, [prefix '1']);
-        codes = [leftCodes; rightCodes];
-    else
-        % Leaf node, assign the current prefix as the code
-        codes(node) = prefix;
-    end
-end
-        `;
+    disp([u(i), ': ', codes.(u(i))]);
+end  `;
 
         const code3 = `%Linear Block Code:
 % Given H Matrix
