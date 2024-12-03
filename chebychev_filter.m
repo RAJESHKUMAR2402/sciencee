@@ -1,97 +1,113 @@
-% Low Pass Filter
 clear all;
 clc;
 close all;
-rp = input('Enter the pass band ripple (dB): ');
-rs = input('Enter the stop band ripple (dB): ');
-wp = input('Enter the pass band frequency (Hz): ');
-ws = input('Enter the stop band frequency (Hz): ');
-fs = input('Enter the sampling frequency (Hz): ');
+pkg load signal;
 
-% Normalize frequencies
-w1 = 2 * wp / fs;
-w2 = 2 * ws / fs;
+disp("LOW PASS FILTERS");
+rp=input('Enter the pass band ripple:');
+rs=input('Enter the stop band ripple:');
+wp=input('Enter the pass band frequency:');
+ws=input('Enter the stop band frequency:');
+fs=input('Enter the sampling frequency:');
+w1=2*wp/fs;
+w2=2*ws/fs;
 
-% Design Low Pass Filter
-[n, wn] = cheb1ord(w1, w2, rp, rs); % Get filter order
-[b, a] = cheby1(n, rp, wn);         % Design analog filter
-[bz, az] = impinvar(b, a, fs);      % Convert to digital filter
+%LOW PASS FILTER
+[n,wn]=cheb1ord(w1,w2,rp,rs);
+[b,a]=cheby1(n,rp,wn);
+[bz,az]=bilinear(b,a,fs);
+disp('bz = ');
+disp(bz);
+disp('az = ');
+disp(az);
+Hz=tf(bz,az);
+w=0:0.01:pi;
+[h,om]=freqz(b,a,w);
+m=20*log10(abs(h));
+an=angle(h);
+disp('Filter order');
+disp(n);
+disp('Cut-off frequency');
+disp(wn);
+subplot(2,1,1);
+plot(om/pi,m);
+ylabel('Gain in db--->');
+xlabel('(a)Normalized frequency--->');
+title('Low pass filter');
+subplot(2,1,2);
+plot(om/pi,an);
+xlabel('(b)Normalized frequency--->');
+ylabel('Phase in radians--->');
 
-% Display coefficients
-disp('Low Pass Filter Coefficients:');
+
+
+% BAND PASS FILTER
+rp = input('Enter the passband ripple (dB): '); % Passband ripple
+rs = input('Enter the stopband attenuation (dB): '); % Stopband ripple/attenuation
+fp = input('Enter the passband frequency range as [f_low, f_high] (Hz): '); % Passband frequency range
+fs = input('Enter the stopband frequency range as [f_low, f_high] (Hz): '); % Stopband frequency range
+Fs = input('Enter the sampling frequency (Hz): '); % Sampling frequency
+
+
+fp_low = fp(1);
+fp_high = fp(2);
+fs_low = fs(1);
+fs_high = fs(2);
+
+wp = [fp_low, fp_high] / (Fs / 2);
+ws = [fs_low, fs_high] / (Fs / 2);
+
+[n, wn] = cheb1ord(wp, ws, rp, rs);
+
+disp('Filter order: ');
+disp(n);
+disp('Cut-off frequencies (normalized): ');
+disp(wn);
+
+[b, a] = cheby1(n, rp, wn);
+
+[bz, az] = bilinear(b, a, Fs);
+
+disp('Discrete-time filter coefficients: ');
 disp('bz = ');
 disp(bz);
 disp('az = ');
 disp(az);
 
-% Frequency Response of Low Pass Filter
+Hz = tf(bz, az, 1/Fs);
+
 w = 0:0.01:pi;
-[h, om] = freqz(bz, az, w);         % Use digital coefficients
+[h, om] = freqz(b, a, w);
 m = 20 * log10(abs(h));
 an = angle(h);
 
-% Display results
-disp('Filter order:');
-disp(n);
-disp('Cut-off frequency:');
-disp(wn);
-
-% Plot Gain and Phase Response for LPF
 figure;
 subplot(2, 1, 1);
-plot(om / pi, m);
-ylabel('Gain (dB)');
-xlabel('(a) Normalized Frequency');
-title('Low Pass Filter');
+plot(om / pi, m, 'LineWidth', 1.5);
+ylabel('Gain (dB) --->');
+xlabel('(a) Normalized frequency --->');
+title('Bandpass Filter: Magnitude Response');
+grid on;
 
 subplot(2, 1, 2);
-plot(om / pi, an);
-xlabel('(b) Normalized Frequency');
-ylabel('Phase (radians)');
+plot(om / pi, an, 'LineWidth', 1.5);
+xlabel('(b) Normalized frequency --->');
+ylabel('Phase (radians) --->');
+title('Bandpass Filter: Phase Response');
+grid on;
 
-% Band Pass Filter
-rp = input('Enter the pass band ripple (dB): ');
-rs = input('Enter the stop band ripple (dB): ');
-wp = input('Enter the pass band frequency (Hz): ');
-ws = input('Enter the stop band frequency (Hz): ');
+%inout
+%?ሀLOW PASS FILTERS
+%Enter the pass band ripple:0.5
+%Enter the stop band ripple:50
+%Enter the pass band frequency:1200
+%Enter the stop band frequency:2400
+%Enter the sampling frequency:10000
 
-% Normalize frequencies
-w1 = 2 * wp / fs;
-w2 = 2 * ws / fs;
-
-% Design Band Pass Filter
-[n, wn] = cheb1ord(w1, w2, rp, rs); % Get filter order
-[b, a] = cheby1(n, rp, wn, 'bandpass'); % Design bandpass analog filter
-[bz, az] = impinvar(b, a, fs);          % Convert to digital filter
-
-% Display coefficients
-disp('Band Pass Filter Coefficients:');
-disp('bz = ');
-disp(bz);
-disp('az = ');
-disp(az);
-
-% Frequency Response of Band Pass Filter
-[h, om] = freqz(bz, az, w); % Use digital coefficients
-m = 20 * log10(abs(h));
-an = angle(h);
-
-% Display results
-disp('Filter order:');
-disp(n);
-disp('Cut-off frequency:');
-disp(wn);
-
-% Plot Gain and Phase Response for BPF
-figure;
-subplot(2, 1, 1);
-plot(om / pi, m);
-ylabel('Gain (dB)');
-xlabel('(a) Normalized Frequency');
-title('Band Pass Filter');
-
-subplot(2, 1, 2);
-plot(om / pi, an);
-xlabel('(b) Normalized Frequency');
-ylabel('Phase (radians)');
+%bandpass filter
+%Enter the passband ripple (dB): 0.25
+%Enter the stopband attenuation (dB): 20
+%Enter the passband frequency range as [f_low, f_high] (Hz): [1200,2400]
+%Enter the stopband frequency range as [f_low, f_high] (Hz): [1000,2700]
+%Enter the sampling frequency (Hz): 15000
 
